@@ -1,0 +1,10 @@
+.login {
+  padding: 1rem 1.5rem;
+}
+.login input,
+.login button {
+  margin: 6px;
+}
+.login button {
+  cursor: pointer;
+}
