@@ -1,0 +1,41 @@
+:root {
+  --c-red: #e0344a;
+  --align-items: center;
+}
+
+.app__header {
+  display: flex;
+  color: var(--c-red);
+  align-items: var(--align-items);
+  border-bottom: thick solid var(--c-red);
+}
+
+.app__header img {
+  width: 144px;
+}
+
+.app__header h1 {
+  margin: 0;
+} 
+
+.app__body {
+  padding: 1rem 1.5rem;
+}
+
+
+.app__body input,
+.app__body button {
+  margin: 4px;
+}
+
+.app__body button {
+  cursor: pointer;
+}
+
+.app__footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: var(--align-items);
+  border-top: thick solid var(--c-red);
+}
