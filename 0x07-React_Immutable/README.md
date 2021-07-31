@@ -27,4 +27,4 @@
 * [x] **8. Lazy Seq**
 
 ## :white_check_mark: Development Software
-:arrow_right: Juan Carlos López Sánchez
+:arrow_right: Juan Carlos López Sánchez 
