@@ -11,6 +11,11 @@ import PropTypes from 'prop-types';
 import { getLatestNotification } from '../utils/utils';
 import { StyleSheet, css } from 'aphrodite';
 import { user, logOut, AppContext } from './AppContext';
+import {
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+} from "../actions/uiActionCreators";
+
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -27,13 +32,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
-      displayDrawer: false,
+
       user,
       logOut: this.logOut,
       listNotifications: listNotificationsInitialState,
@@ -51,13 +55,7 @@ class App extends Component {
       this.state.logOut();
     }
   }
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
 
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
   logIn(email, password) {
     this.setState({
       user: {
@@ -121,9 +119,19 @@ class App extends Component {
   }
 }
 
-App.defaultProps = {};
+App.defaultProps = {
+  isLoggedIn: false,
+  displayDrawer: false,
+  displayNotificationDrawer: () => { },
+  hideNotificationDrawer: () => { },
+};
 
-App.propTypes = {};
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  displayDrawer: PropTypes.bool,
+  displayNotificationDrawer: PropTypes.func,
+  hideNotificationDrawer: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   footer: {
@@ -143,6 +151,15 @@ const styles = StyleSheet.create({
 export const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.get("isUserLoggedIn"),
+    displayDrawer: state.get("isNotificationDrawerVisible"),
   };
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = {
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+};
+
+// export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
